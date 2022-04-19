@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-spinner *ngIf="reviews.length === 0"></mat-spinner>
+  {{filterReviews.length}}
+  <mat-card *ngFor="let review of reviews">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>{{ review.game.name }}</h2>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <h3>Score: {{review.score}}</h3>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ review.body }}</p>
+      <button mat-raised-button color="basic">{{ review.likes }} likes</button>
+      <div *ngIf="this.review.sentiment.tag === 'positive'; else negative">
+        <button mat-raised-button color="primary">{{ review.sentiment.tag }}</button>
+      </div>
+      <ng-template #negative>
+        <button mat-raised-button color="warn">{{ review.sentiment.tag }}</button>
+      </ng-template>
+    </mat-card-content>
+    <mat-card-footer>
+      <h5>Submitted: {{ review.submitted | date: 'dd/MM/YYYY' }}</h5>
+    </mat-card-footer>
+  </mat-card>
+</div>
